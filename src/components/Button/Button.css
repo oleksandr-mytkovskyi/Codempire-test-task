@@ -1,0 +1,17 @@
+.button {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    line-height: 65px;
+    font-size: 35px;
+    text-align: center;
+}
+.dark {
+    background-color: #333333; 
+}
+.orange {
+    background-color: orange; 
+}
+.grey {
+    background-color: grey; 
+}

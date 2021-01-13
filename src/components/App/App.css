@@ -1,0 +1,37 @@
+.app {
+  height: 812px;
+  width: 375px;
+  background-color: #000;
+  color: #fff;
+  padding: 20px;
+}
+
+.top-panel {
+  display: flex;
+  justify-content: space-between;
+}
+
+.output {
+  font-size: 64px;
+  margin: 50px 5px 0px 5px;
+  text-align: right;
+  overflow: hidden;
+}
+
+.button-area {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  grid-gap: 15px;
+}
+
+.bottom-panel{ 
+  width: 33%;
+  height: 5px;
+  background-color: #fff;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 0;
+  right: 33%;
+  margin: 5px;
+}
