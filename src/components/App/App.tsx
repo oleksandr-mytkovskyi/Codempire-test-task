@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import {Button} from '../Button/Button'
+import {Button} from '../Button/Button';
 import topIcon from "../../img/top-icon.png";
+import {dataArr} from '../../constants/constans';
 import './App.css';
 
 function App() {
@@ -103,6 +104,38 @@ function clickResult(): void {
     setCache('')
     setOperator('')
 }
+
+    function renderButtons (arr: any) {
+        return arr.map((elem: any, i: number) => {
+            let a:any
+            switch (elem.onButtonClick) {
+                case 'clickNumber': 
+                    a = clickNumber 
+                    break
+                case 'clickOperator': 
+                    a = clickOperator 
+                    break
+                case 'clickNull': 
+                    a = clickNull 
+                    break
+                case 'clickAddFunc': 
+                    a = clickAddFunc 
+                    break
+                case 'clickMemoryFunc': 
+                    a = clickMemoryFunc 
+                    break
+                case 'clickResult': 
+                    a = clickResult 
+                    break
+            }
+            return(
+                <Button onButtonClick={a} value={elem.data} type={elem.type} key={i}/>
+            )
+        })
+    }
+
+    const buttons = renderButtons(dataArr);
+
   return (
     <div className='app'>
       <div className='top-panel'>
@@ -113,30 +146,7 @@ function clickResult(): void {
         <div>{data? data : 0}</div>
       </div>
       <div className='button-area'>
-          <Button onButtonClick={clickAddFunc} value='AC' type='grey'/>
-          <Button onButtonClick={clickAddFunc} value='±' type='grey'/>
-          <Button onButtonClick={clickAddFunc} value='%' type='grey'/>
-          <Button onButtonClick={clickMemoryFunc} value='ms' type='orange'/>
-          <Button onButtonClick={clickMemoryFunc} value='mc' type='dark'/>
-          <Button onButtonClick={clickMemoryFunc} value='mr' type='dark'/>
-          <Button onButtonClick={clickMemoryFunc} value='m-' type='dark'/>
-          <Button onButtonClick={clickMemoryFunc} value='m+' type='orange'/>
-          <Button onButtonClick={clickNumber} value='7' type='dark'/>
-          <Button onButtonClick={clickNumber} value='8' type='dark'/>
-          <Button onButtonClick={clickNumber} value='9' type='dark'/>
-          <Button onButtonClick={clickOperator} value='x' type='orange'/>
-          <Button onButtonClick={clickNumber} value='4' type='dark'/>
-          <Button onButtonClick={clickNumber} value='5' type='dark'/>
-          <Button onButtonClick={clickNumber} value='6' type='dark'/>
-          <Button onButtonClick={clickOperator} value='÷' type='orange'/>
-          <Button onButtonClick={clickNumber} value='1' type='dark'/>
-          <Button onButtonClick={clickNumber} value='2' type='dark'/>
-          <Button onButtonClick={clickNumber} value='3' type='dark'/>
-          <Button onButtonClick={clickOperator} value='+' type='orange'/>
-          <Button onButtonClick={clickNull} value='0' type='dark'/>
-          <Button onButtonClick={clickAddFunc} value='.' type='dark'/>
-          <Button onButtonClick={clickResult} value='=' type='dark'/>
-          <Button onButtonClick={clickOperator} value='-' type='orange'/>
+          {buttons}
       </div>
       <div className="bottom-panel"></div>
     </div>
