@@ -8,30 +8,27 @@ function App() {
   const [cache, setCache] = useState('');
   const [data, setData] = useState('');
   const [operator, setOperator] = useState('');
+
+  const num: number = Number(data)
+  const cacheNum: number = Number(cache)
+
   function clickOperator (opr:string): void {
-    if (!cache) setCache(data);
-    switch (operator) {
-        case '+': 
-            if (cache) {
-              setCache((Number(cache) + Number(data)).toString())
-            } else setCache(data);
-            break
-        case '-':
-            if (cache) {
-              setCache((Number(cache) - Number(data)).toString())
-            } else setCache(data)
-            break
-        case 'x':
-            if (cache) {
-              setCache((Number(cache) * Number(data)).toString())
-            } else setCache(data)
-            break
-        case '÷':
-            if (cache) {
-              setCache((Number(cache) / Number(data)).toString())
-            } else setCache(data)
-            break
-    }
+    if (operator) {
+        switch (operator) {
+            case '+': 
+                setCache((cacheNum + num).toString())
+                break
+            case '-':
+                setCache((cacheNum - num).toString())
+                break
+            case 'x':
+                setCache((cacheNum * num).toString())
+                break
+            case '÷':
+                setCache((cacheNum / num).toString())
+                break
+        }
+    } else setCache(num.toString())
     setOperator(opr)
     setData('')
 }
@@ -39,23 +36,28 @@ function App() {
 function clickNumber (value: string): void {
     setData(data + value)
 }
+
 function clickNull (value: string): void {
-  setData(data === '0' ? '' :  data + value)
+  setData(data === '0' ? '0' :  data + value)
 }
 
 function clickAddFunc (value:string): void {
     switch(value) {
         case '%':
-            setData((Number(data) / 100).toString())
+            setData((num / 100).toString())
             break
         case '±': 
-            setData(Number(data) > 0 ? '-' + data : data.substring(1))
+            setData((num * -1).toString())
             break
         case 'AC':
             setData('')
             setCache('')
             setOperator('')
             break
+        case '.':
+            if (data.includes('.')) {
+                setData(data)
+            } else setData(data + '.')
     }
 }
 
@@ -69,10 +71,10 @@ function clickMemoryFunc (value: string): void {
             setData(memory ? memory : '0')
             break
         case 'm+':
-            setMemory((Number(memory) + Number(data)).toString())
+            setMemory((Number(memory) + num).toString())
             break
         case 'm-':
-            setMemory((Number(memory) - Number(data)).toString())
+            setMemory((Number(memory) - num).toString())
             break
         case 'ms':
             setData('')
@@ -82,28 +84,30 @@ function clickMemoryFunc (value: string): void {
 }
 
 function clickResult(): void {
+    if(!operator) return
     switch(operator) {
         case '+': 
-            setData((Number(cache) + Number(data)).toString())
+            setData((cacheNum + num).toString())
             break
         case '-': 
-            setData((Number(cache) - Number(data)).toString())
+            setData((cacheNum - num).toString())
             break
         case 'x': 
-            setData((Number(cache) * Number(data)).toString())
+            setData((cacheNum * num).toString())
             break
         case '÷':
-            setData((Number(cache) / Number(data)).toString())
+            setData((cacheNum / num).toString())
             break
         default: break
     }     
+    setCache('')
+    setOperator('')
 }
-
   return (
     <div className='app'>
       <div className='top-panel'>
         <div className='time'>12:00</div>
-        <div className="top-icon"><img src={topIcon}></img></div>
+        <div className="top-icon"><img src={topIcon} alt='icon-iphone' ></img></div>
       </div>
       <div className='output'>
         <div>{data? data : 0}</div>
@@ -113,7 +117,6 @@ function clickResult(): void {
           <Button onButtonClick={clickAddFunc} value='±' type='grey'/>
           <Button onButtonClick={clickAddFunc} value='%' type='grey'/>
           <Button onButtonClick={clickMemoryFunc} value='ms' type='orange'/>
-         
           <Button onButtonClick={clickMemoryFunc} value='mc' type='dark'/>
           <Button onButtonClick={clickMemoryFunc} value='mr' type='dark'/>
           <Button onButtonClick={clickMemoryFunc} value='m-' type='dark'/>
@@ -131,7 +134,7 @@ function clickResult(): void {
           <Button onButtonClick={clickNumber} value='3' type='dark'/>
           <Button onButtonClick={clickOperator} value='+' type='orange'/>
           <Button onButtonClick={clickNull} value='0' type='dark'/>
-          <Button onButtonClick={clickNumber} value='.' type='dark'/>
+          <Button onButtonClick={clickAddFunc} value='.' type='dark'/>
           <Button onButtonClick={clickResult} value='=' type='dark'/>
           <Button onButtonClick={clickOperator} value='-' type='orange'/>
       </div>
