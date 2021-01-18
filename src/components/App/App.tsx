@@ -39,7 +39,7 @@ function clickNumber (value: string): void {
 }
 
 function clickNull (value: string): void {
-  setData(data === '0' ? '0' :  data + value)
+  setData(data === '0' ? '' :  data + value)
 }
 
 function clickAddFunc (value:string): void {

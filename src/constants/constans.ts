@@ -19,8 +19,8 @@ export const dataArr:Array<object> = [
     {data: '2', type: 'dark', onButtonClick: 'clickNumber'},
     {data: '3', type: 'dark', onButtonClick: 'clickNumber'},
     {data: '+', type: 'orange', onButtonClick: 'clickOperator'},
-    {data: '0', type: 'dark', onButtonClick: 'clickNumber'},
+    {data: '0', type: 'dark', onButtonClick: 'clickNull'},
     {data: '.', type: 'dark', onButtonClick: 'clickAddFunc'},
     {data: '=', type: 'dark', onButtonClick: 'clickResult'},
-    {data: '+', type: 'orange', onButtonClick: 'clickOperator'},
+    {data: '-', type: 'orange', onButtonClick: 'clickOperator'},
 ]
